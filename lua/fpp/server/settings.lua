@@ -742,16 +742,17 @@ end
 
 local function changeFallbackOwner(ply, _, args)
     local fallback = tonumber(args[1]) and Player(tonumber(args[1]))
-
+    KZVG.ErrorNoHalt("[POSSIBLE EXPLOIT WARNNING] Player ["..tostring(ply:Nick()).."] ["..tostring(ply:SteamID()).."] is trying to set "..tostring(ply:SteamID()).." as his fallback! Exiting!...")
+    --[[
     if tonumber(args[1]) == -1 then
         ply.FPPFallbackOwner = nil
         FPP.Notify(ply, "Fallback owner set", true)
         return
     end
-
+    ]]
     if not IsValid(fallback) or not fallback:IsPlayer() or fallback == ply then FPP.Notify(ply, "Player invalid", false) return end
 
-    setFallbackOwner(ply, fallback)
+    --setFallbackOwner(ply, fallback)
     FPP.Notify(ply, "Fallback owner set", true)
 end
 concommand.Add("FPP_FallbackOwner", changeFallbackOwner)
